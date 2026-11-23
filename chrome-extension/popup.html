@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Vimeo → R2 Migrator</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body class="popup-body">
+  <header class="topbar">
+    <div class="brand">
+      <span class="badge-dot"></span>
+      <strong>Vimeo → Cloudflare R2</strong>
+    </div>
+    <span id="connStatus" class="pill pill-muted">Not Configured</span>
+  </header>
+
+  <main class="popup-main">
+    <div class="stat-grid">
+      <div class="stat-card">
+        <span class="stat-label">Catalog Videos</span>
+        <strong id="popTotalVideos">0</strong>
+      </div>
+      <div class="stat-card">
+        <span class="stat-label">Migrated to R2</span>
+        <strong id="popMigratedVideos">0</strong>
+      </div>
+      <div class="stat-card">
+        <span class="stat-label">Total Size</span>
+        <strong id="popTotalSize">0 GB</strong>
+      </div>
+    </div>
+
+    <div id="popLiveBox" class="live-box hidden">
+      <div class="live-header">
+        <span id="popLiveTitle">Transferring...</span>
+        <span id="popLiveCount">0 / 0</span>
+      </div>
+      <div class="progress-track">
+        <div id="popProgressBar" class="progress-fill" style="width: 0%"></div>
+      </div>
+    </div>
+
+    <div class="action-stack">
+      <button id="btnOpenSidePanel" class="btn btn-primary">Open Side Panel</button>
+      <button id="btnOpenDashboard" class="btn btn-secondary">Open Full Dashboard Tab</button>
+    </div>
+  </main>
+
+  <script type="module" src="js/popup.js"></script>
+</body>
+</html>

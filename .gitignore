@@ -1,0 +1,18 @@
+# Ignore everything outside chrome-extension/ and README.md / docs/
+*
+!.gitignore
+!README.md
+!docs/
+!docs/**
+!chrome-extension/
+!chrome-extension/**
+!vimeo-cloudflare-r2-extension.zip
+
+# Never commit secrets or local state
+.env
+.env.*
+vimeo_catalog.json
+migration_state.json
+__pycache__/
+node_modules/
+.DS_Store

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vimeo → Cloudflare R2 Migrator</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body class="dash-body">
+  <header class="topbar">
+    <div class="brand">
+      <span class="badge-dot"></span>
+      <h1>Vimeo → Cloudflare R2 Migrator</h1>
+    </div>
+    <div class="header-actions">
+      <span id="bucketBadge" class="pill pill-muted">Disconnected</span>
+      <button id="btnToggleGuide" class="btn btn-secondary btn-sm">How to Get Credentials</button>
+      <button id="btnToggleSettings" class="btn btn-secondary btn-sm">Connections & Worker</button>
+    </div>
+  </header>
+
+  <section id="settingsPanel" class="card settings-card">
+    <div class="section-head">
+      <h2>1. Connect Vimeo & Cloudflare Worker</h2>
+      <button id="btnInlineGuide" type="button" class="link-btn">Show step-by-step setup guide ▾</button>
+    </div>
+    <div id="setupGuideContainer" class="guide-box hidden"></div>
+    <div class="form-grid">
+      <label><span>Vimeo Access Token (<code>public</code>, <code>private</code>, <code>video_files</code>)</span><input id="inpVimeoToken" type="password" placeholder="e.g. 2fcec7bf942b71e959acc8dc..." /></label>
+      <label><span>Cloudflare Worker URL</span><input id="inpWorkerUrl" type="url" placeholder="https://vimeo-r2-migrator.your-subdomain.workers.dev" /></label>
+      <label>
+        <span class="label-row">Worker Migration Secret (<code>MIGRATION_SECRET</code>) <button id="btnGenSecret" type="button" class="link-btn">Generate & Copy</button></span>
+        <input id="inpMigrationSecret" type="password" placeholder="Shared secret configured in your Worker" />
+      </label>
+      <label><span>Parallel Transfers (1–15)</span><input id="inpConcurrency" type="number" min="1" max="15" value="6" /></label>
+    </div>
+    <div class="row-actions">
+      <button id="btnSaveSettings" class="btn btn-primary">Save & Test Connections</button>
+      <button id="btnCheckR2Stats" class="btn btn-secondary">Verify Live R2 Bucket Stats</button>
+      <button id="btnCopyWorkerCode" class="btn btn-secondary">Copy Cloudflare Worker Code</button>
+      <span id="settingsFeedback" class="feedback-text"></span>
+    </div>
+  </section>
+
+  <section class="card stats-bar">
+    <div class="stat-card"><span class="stat-label">Total Catalog</span><strong id="statCatalogCount">0 videos (0 GB)</strong></div>
+    <div class="stat-card"><span class="stat-label">Migrated to R2</span><strong id="statMigratedCount">0 / 0</strong></div>
+    <div class="stat-card"><span class="stat-label">Live R2 Bucket</span><strong id="statLiveR2">—</strong></div>
+    <div class="row-actions">
+      <button id="btnScanVimeo" class="btn btn-secondary">1. Scan Vimeo Catalog</button>
+      <button id="btnMigrateSelected" class="btn btn-primary">2. Migrate Filtered / Selected</button>
+      <button id="btnStopMigration" class="btn btn-danger hidden">Stop</button>
+      <button id="btnExportJson" class="btn btn-secondary btn-sm">Export JSON</button>
+    </div>
+  </section>
+
+  <section id="liveBanner" class="card live-banner hidden">
+    <div class="live-header"><strong id="liveBannerTitle">Transferring videos to Cloudflare R2...</strong><span id="liveBannerCounts">0 / 0</span></div>
+    <div class="progress-track"><div id="liveBannerBar" class="progress-fill" style="width: 0%"></div></div>
+    <div id="activeWorkersList" class="active-list"></div>
+  </section>
+
+  <section class="card table-card">
+    <div class="filter-bar">
+      <input id="inpSearch" type="search" placeholder="Search title, folder, or Vimeo ID..." />
+      <select id="selFolder"><option value="">All Folders</option></select>
+      <select id="selStatus"><option value="">All Statuses</option><option value="pending">Pending</option><option value="done">Migrated (Done)</option><option value="failed">Failed</option><option value="no_source">Missing Source Link</option></select>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th><input id="chkSelectAll" type="checkbox" /></th><th>Video</th><th>Folder</th><th>Resolution & Size</th><th>R2 Key</th><th>Status</th></tr></thead>
+        <tbody id="videoTableBody"></tbody>
+      </table>
+    </div>
+  </section>
+  <script type="module" src="js/dashboard.js"></script>
+</body>
+</html>
