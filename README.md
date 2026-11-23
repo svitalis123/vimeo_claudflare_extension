@@ -12,6 +12,8 @@ Fast, edge-to-edge video migration from **Vimeo** to **Cloudflare R2** powered b
   </a>
 </p>
 
+![Edge-to-Edge Video Migration Architecture](docs/architecture-illustration.jpg)
+
 ---
 
 ## Features
