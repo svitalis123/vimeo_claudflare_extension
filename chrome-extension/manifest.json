@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Vimeo to Cloudflare R2 Migrator",
   "version": "1.0.0",
-  "description": "Fast edge-to-edge video migration from Vimeo to Cloudflare R2 via Cloudflare Workers.",
+  "description": "Fast edge-to-edge video migration and backup from Vimeo to Cloudflare R2 via Cloudflare Workers.",
   "permissions": [
     "storage",
     "sidePanel",
@@ -10,8 +10,10 @@
   ],
   "host_permissions": [
     "https://api.vimeo.com/*",
-    "https://api.cloudflare.com/*",
     "https://*.workers.dev/*",
+    "https://*.vimeocdn.com/*"
+  ],
+  "optional_host_permissions": [
     "https://*/*"
   ],
   "background": {

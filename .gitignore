@@ -7,6 +7,8 @@
 !chrome-extension/
 !chrome-extension/**
 !vimeo-cloudflare-r2-extension.zip
+!chrome-web-store-upload.zip
+!PRIVACY_POLICY.md
 
 # Never commit secrets or local state
 .env

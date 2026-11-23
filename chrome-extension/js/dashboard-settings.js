@@ -53,6 +53,10 @@ export function bindSettingsActions() {
       concurrency: Number(document.getElementById("inpConcurrency").value || 6),
     });
     try {
+      const workerOrigin = new URL(saved.workerUrl).origin + "/*";
+      if (!saved.workerUrl.includes(".workers.dev") && chrome.permissions?.request) {
+        await chrome.permissions.request({ origins: [workerOrigin] });
+      }
       const vimeoInfo = await verifyVimeoToken(saved.vimeoToken);
       const workerRes = await fetch(saved.workerUrl);
       const workerJson = await workerRes.json();
